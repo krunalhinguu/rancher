@@ -197,6 +197,18 @@ node {
                   returnStdout: true
                 ).trim()
                 println "HA PSP enabled option: ${env.RANCHER_PSP_ENABLED}"
+                
+                env.RANCHER_HELM_EXTRA_SETTINGS= sh (
+                  script: "./yq '.ha.helmExtraSettings' ${initConfigPath}",
+                  returnStdout: true
+                ).trim()
+                println "HA Helm extra settings option: ${env.RANCHER_HELM_EXTRA_SETTINGS}"
+
+                env.RANCHER_HELM_EXTRA_SETTINGS_TO_UPGRADE= sh (
+                  script: "./yq '.ha.helmExtraSettingsToUpgrade' ${initConfigPath}",
+                  returnStdout: true
+                ).trim()
+                println "HA Helm extra settings option to be used on an upgrade: ${env.RANCHER_HELM_EXTRA_SETTINGS_TO_UPGRADE}"
 
                 env.HA_CLEANUP= sh (
                   script: "./yq '.ha.cleanup' ${initConfigPath}",
@@ -218,6 +230,7 @@ node {
                  string(name: 'RKE_VERSION', value: "${env.RKE_VERSION}"),
                  string(name: 'RANCHER_HA_HARDENED', value: "${env.RANCHER_HA_HARDENED}"),
                  string(name: 'RANCHER_PSP_ENABLED', value: "${env.RANCHER_PSP_ENABLED}"),
+                 string(name: 'RANCHER_HELM_EXTRA_SETTINGS', value: "${env.RANCHER_HELM_EXTRA_SETTINGS}")
                 ]
 
               build job: 'rancher-v3_ha_deploy', parameters: deployParams
@@ -274,7 +287,7 @@ node {
                        def containerName = "${job_name}${env.BUILD_NUMBER}_$it-provisioning"
                        try {
                          sh "docker run --name ${containerName} -t -e CATTLE_TEST_CONFIG=\"${absoluteConfigPath}\" " +
-                       "${imageName} sh -c \"/root/go/bin/gotestsum --format standard-verbose --packages=\"${testsDir}${testPackage}\" --junitfile ${testResultsOut} -- ${testCase} -timeout=\"60m\" -v\""
+                       "${imageName} sh -c \"/root/go/bin/gotestsum --format standard-verbose --packages=\"${testsDir}${testPackage}\" --junitfile ${testResultsOut} -- -tags=validation ${testCase} -timeout=\"60m\" -v\""
 
                         dir("./${patchedConfigsDir}") {
                           sh "docker cp ${containerName}:${rootPath}${configsDir}/$it ."
@@ -354,7 +367,8 @@ node {
                 string(name: 'RANCHER_IMAGE_TAG', value: "${env.HA_IMAGE_TAG_TO_UPGRADE}"),
                 string(name: 'RANCHER_HELM_REPO', value: "${env.HA_HELM_REPO}"),
                 string(name: 'RANCHER_HA_CERT_OPTION', value: "${env.HA_CERT_OPTION}"),
-                string(name: 'RANCHER_HA_KUBECONFIG', value: "${env.HA_KUBECONFIG}")
+                string(name: 'RANCHER_HA_KUBECONFIG', value: "${env.HA_KUBECONFIG}"),
+                string(name: 'RANCHER_HELM_EXTRA_SETTINGS', value: "${env.RANCHER_HELM_EXTRA_SETTINGS_TO_UPGRADE}")
                ]
 
                 build job: 'rancher-v3_ha_upgrade', parameters: upgradeParams

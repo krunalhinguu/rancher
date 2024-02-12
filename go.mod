@@ -87,7 +87,7 @@ require (
 	github.com/AzureAD/microsoft-authentication-library-for-go v0.5.1
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/Masterminds/sprig/v3 v3.2.3
-	github.com/aws/aws-sdk-go v1.45.6
+	github.com/aws/aws-sdk-go v1.49.16
 	github.com/bep/debounce v1.2.0
 	github.com/coreos/go-iptables v0.6.0
 	github.com/coreos/go-oidc/v3 v3.5.0
@@ -133,15 +133,15 @@ require (
 	github.com/rancher/fleet/pkg/apis v0.0.0-20231017140638-93432f288e79
 	github.com/rancher/gke-operator v1.2.0
 	github.com/rancher/kubernetes-provider-detector v0.1.5
-	github.com/rancher/lasso v0.0.0-20230830164424-d684fdeb6f29
-	github.com/rancher/machine v0.15.0-rancher106
+	github.com/rancher/lasso v0.0.0-20240123150939-7055397d6dfa
+	github.com/rancher/machine v0.15.0-rancher109
 	github.com/rancher/norman v0.0.0-20230831160711-5de27f66385d
 	github.com/rancher/rancher/pkg/client v0.0.0
 	github.com/rancher/remotedialer v0.3.0
-	github.com/rancher/rke v1.5.0
+	github.com/rancher/rke v1.5.2-rc1
 	github.com/rancher/steve v0.0.0-20231016202603-993540401906
 	github.com/rancher/system-upgrade-controller/pkg/apis v0.0.0-20210727200656-10b094e30007
-	github.com/rancher/wrangler/v2 v2.1.2
+	github.com/rancher/wrangler/v2 v2.1.3
 	github.com/robfig/cron v1.1.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.8.4
@@ -175,8 +175,8 @@ require (
 	k8s.io/kubernetes v1.29.0
 	k8s.io/utils v0.0.0-20240102154912-e7106e64919e
 	sigs.k8s.io/aws-iam-authenticator v0.5.9
-	sigs.k8s.io/cluster-api v1.5.2
-	sigs.k8s.io/controller-runtime v0.15.1
+	sigs.k8s.io/cluster-api v1.5.5
+	sigs.k8s.io/controller-runtime v0.15.3
 	sigs.k8s.io/yaml v1.4.0
 )
 
@@ -253,7 +253,7 @@ require (
 	google.golang.org/genproto/googleapis/api v0.0.0-20240108191215-35c7eff3a6b1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240108191215-35c7eff3a6b1 // indirect
 	gopkg.in/go-jose/go-jose.v2 v2.6.1 // indirect
-	k8s.io/pod-security-admission v0.28.2 // indirect
+	k8s.io/pod-security-admission v0.28.6 // indirect
 )
 
 require (
@@ -365,7 +365,7 @@ require (
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f // indirect
-	github.com/onsi/gomega v1.29.0 // indirect
+	github.com/onsi/gomega v1.30.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0-rc3 // indirect
 	github.com/opencontainers/runc v1.1.10 // indirect
