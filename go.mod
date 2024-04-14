@@ -73,7 +73,7 @@ replace (
 	oras.land/oras-go => oras.land/oras-go v1.2.2 // for docker 20.10.x compatibility
 
 	sigs.k8s.io/aws-iam-authenticator => github.com/rancher/aws-iam-authenticator v0.5.9-0.20220713170329-78acb8c83863
-	sigs.k8s.io/cluster-api => sigs.k8s.io/cluster-api v1.5.5
+	sigs.k8s.io/cluster-api => sigs.k8s.io/cluster-api v1.6.3
 )
 
 require (
@@ -102,7 +102,7 @@ require (
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/golang-jwt/jwt v3.2.1+incompatible
 	github.com/golang/mock v1.6.0
-	github.com/golang/protobuf v1.5.3
+	github.com/golang/protobuf v1.5.4
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.1
@@ -119,9 +119,9 @@ require (
 	github.com/pborman/uuid v1.2.1
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.52.0
-	github.com/prometheus/client_golang v1.18.0
+	github.com/prometheus/client_golang v1.19.0
 	github.com/prometheus/client_model v0.5.0
-	github.com/prometheus/common v0.45.0
+	github.com/prometheus/common v0.48.0
 	github.com/rancher/aks-operator v1.2.1
 	github.com/rancher/apiserver v0.0.0-20240207153744-69b3c2b56f3f
 	github.com/rancher/channelserver v0.6.1-0.20240212155841-07630c8295da
@@ -141,7 +141,7 @@ require (
 	github.com/rancher/wrangler/v2 v2.1.4
 	github.com/robfig/cron v1.1.0
 	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80
 	github.com/urfave/cli v1.22.14
 	github.com/vishvananda/netlink v1.2.1-beta.2
@@ -161,7 +161,7 @@ require (
 	helm.sh/helm/v3 v3.9.0
 	k8s.io/api v0.29.0
 	k8s.io/apiextensions-apiserver v0.29.0
-	k8s.io/apimachinery v0.29.2
+	k8s.io/apimachinery v0.29.0
 	k8s.io/apiserver v0.29.0
 	k8s.io/cli-runtime v0.29.0
 	k8s.io/client-go v12.0.0+incompatible
@@ -172,8 +172,8 @@ require (
 	k8s.io/kubernetes v1.29.0
 	k8s.io/utils v0.0.0-20240102154912-e7106e64919e
 	sigs.k8s.io/aws-iam-authenticator v0.5.9
-	sigs.k8s.io/cluster-api v1.5.5
-	sigs.k8s.io/controller-runtime v0.16.3
+	sigs.k8s.io/cluster-api v1.6.3
+	sigs.k8s.io/controller-runtime v0.16.5
 	sigs.k8s.io/yaml v1.4.0
 )
 
@@ -189,7 +189,6 @@ require (
 
 require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
-	github.com/NYTimes/gziphandler v1.1.1 // indirect
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/acarl005/stripansi v0.0.0-20180116102854-5a71ef0e047d // indirect
 	github.com/antlr/antlr4/runtime/Go/antlr/v4 v4.0.0-20230305170008-8188dc5388df // indirect
@@ -215,14 +214,12 @@ require (
 	github.com/google/go-intervals v0.0.2 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
-	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.1-0.20210315223345-82c243799c99 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/klauspost/pgzip v1.2.6-0.20220930104621-17e8dac29df8 // indirect
 	github.com/kr/fs v0.1.0 // indirect
 	github.com/letsencrypt/boulder v0.0.0-20230213213521-fdfea0d469b6 // indirect
 	github.com/mattn/go-shellwords v1.0.12 // indirect
-	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
 	github.com/miekg/pkcs11 v1.1.1 // indirect
 	github.com/mistifyio/go-zfs/v3 v3.0.1 // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
@@ -247,17 +244,12 @@ require (
 	go.etcd.io/bbolt v1.3.8 // indirect
 	go.mongodb.org/mongo-driver v1.11.3 // indirect
 	go.mozilla.org/pkcs7 v0.0.0-20210826202110-33d05740a352 // indirect
-	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.42.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.21.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.21.0 // indirect
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240108191215-35c7eff3a6b1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240108191215-35c7eff3a6b1 // indirect
 	gopkg.in/go-jose/go-jose.v2 v2.6.1 // indirect
-	k8s.io/cloud-provider v0.0.0 // indirect
-	k8s.io/controller-manager v0.29.0 // indirect
-	k8s.io/kms v0.29.0 // indirect
-	k8s.io/kubelet v0.0.0 // indirect
 	k8s.io/pod-security-admission v0.29.0 // indirect
 )
 
@@ -388,7 +380,7 @@ require (
 	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/cobra v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.5.0 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/vishvananda/netns v0.0.4 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
@@ -417,7 +409,7 @@ require (
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20240102182953-50ed04b92917 // indirect
-	google.golang.org/protobuf v1.32.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
