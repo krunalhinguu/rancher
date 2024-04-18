@@ -73,7 +73,7 @@ replace (
 	oras.land/oras-go => oras.land/oras-go v1.2.2 // for docker 20.10.x compatibility
 
 	sigs.k8s.io/aws-iam-authenticator => github.com/rancher/aws-iam-authenticator v0.5.9-0.20220713170329-78acb8c83863
-	sigs.k8s.io/cluster-api => sigs.k8s.io/cluster-api v1.6.3
+	sigs.k8s.io/cluster-api => sigs.k8s.io/cluster-api v1.6.4
 )
 
 require (
@@ -148,7 +148,7 @@ require (
 	github.com/vmware/govmomi v0.30.6
 	golang.org/x/crypto v0.21.0
 	golang.org/x/mod v0.16.0
-	golang.org/x/net v0.22.0
+	golang.org/x/net v0.23.0
 	golang.org/x/oauth2 v0.16.0
 	golang.org/x/sync v0.6.0
 	golang.org/x/text v0.14.0
@@ -172,7 +172,7 @@ require (
 	k8s.io/kubernetes v1.29.0
 	k8s.io/utils v0.0.0-20240102154912-e7106e64919e
 	sigs.k8s.io/aws-iam-authenticator v0.5.9
-	sigs.k8s.io/cluster-api v1.6.3
+	sigs.k8s.io/cluster-api v1.6.4
 	sigs.k8s.io/controller-runtime v0.16.5
 	sigs.k8s.io/yaml v1.4.0
 )

@@ -50,7 +50,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	k8s.io/api v0.29.0
 	k8s.io/apimachinery v0.29.0
-	sigs.k8s.io/cluster-api v1.6.3
+	sigs.k8s.io/cluster-api v1.6.4
 )
 
 require (
@@ -84,7 +84,7 @@ require (
 	github.com/prometheus/procfs v0.11.1 // indirect
 	github.com/rancher/lasso v0.0.0-20240123150939-7055397d6dfa // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/net v0.22.0 // indirect
+	golang.org/x/net v0.23.0 // indirect
 	golang.org/x/oauth2 v0.16.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/term v0.18.0 // indirect
