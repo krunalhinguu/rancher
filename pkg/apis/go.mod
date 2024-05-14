@@ -2,12 +2,7 @@ module github.com/rancher/rancher/pkg/apis
 
 go 1.22
 
-replace (
-	github.com/rancher/aks-operator => github.com/krunalhinguu/aks-operator v1.29.3-rancher1
-	github.com/rancher/eks-operator => github.com/krunalhinguu/eks-operator v1.29.3-rancher1
-	github.com/rancher/gke-operator => github.com/krunalhinguu/gke-operator v1.29.3-rancher1
-	github.com/rancher/rke => github.com/krunalhinguu/rke v1.29.3-rancher1
-)
+replace github.com/rancher/rke => github.com/krunalhinguu/rke v1.29.3-rancher1
 
 replace (
 	k8s.io/api => k8s.io/api v0.29.3
@@ -35,16 +30,16 @@ replace (
 )
 
 require (
-	github.com/rancher/aks-operator v1.3.0-rc12
-	github.com/rancher/eks-operator v1.4.0-rc9
+	github.com/rancher/aks-operator v1.9.0-rc.1
+	github.com/rancher/eks-operator v1.9.0-rc.1
 	github.com/rancher/fleet/pkg/apis v0.0.0-20231017140638-93432f288e79
-	github.com/rancher/gke-operator v1.3.0-rc6
+	github.com/rancher/gke-operator v1.9.0-rc.1
 	github.com/rancher/norman v0.0.0-20240503193601-9f5f6586bb5b
 	github.com/rancher/rke v1.6.0-rc1
 	github.com/rancher/wrangler/v2 v2.2.0-rc6
 	github.com/sirupsen/logrus v1.9.3
-	k8s.io/api v0.29.3
-	k8s.io/apimachinery v0.29.3
+	k8s.io/api v0.29.4
+	k8s.io/apimachinery v0.29.4
 	sigs.k8s.io/cluster-api v1.6.4
 )
 
@@ -80,23 +75,23 @@ require (
 	github.com/rancher/lasso v0.0.0-20240424194130-d87ec407d941 // indirect
 	github.com/rancher/wrangler v1.1.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/oauth2 v0.19.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/term v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/oauth2 v0.20.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
+	golang.org/x/term v0.20.0 // indirect
+	golang.org/x/text v0.15.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.29.3 // indirect
-	k8s.io/apiserver v0.29.3 // indirect
+	k8s.io/apiextensions-apiserver v0.29.4 // indirect
+	k8s.io/apiserver v0.29.4 // indirect
 	k8s.io/client-go v12.0.0+incompatible // indirect
-	k8s.io/component-base v0.29.3 // indirect
+	k8s.io/component-base v0.29.4 // indirect
 	k8s.io/klog/v2 v2.110.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20231010175941-2dd684a91f00 // indirect
-	k8s.io/kubernetes v1.28.6 // indirect
+	k8s.io/kubernetes v1.29.4 // indirect
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b // indirect
 	sigs.k8s.io/cli-utils v0.35.0 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
