@@ -14,6 +14,7 @@ replace (
 	github.com/rancher/machine => github.com/krunalhinguu/machine v1.31.0-rancher1
 	github.com/rancher/norman => github.com/krunalhinguu/norman v1.31.0-rancher1
 	github.com/rancher/rke => github.com/krunalhinguu/rke v1.31.0-rancher1
+	github.com/rancher/shepherd => github.com/krunalhinguu/shepherd v1.31.0-rancher1
 	github.com/rancher/steve => github.com/krunalhinguu/steve v1.31.0-rancher1
 	github.com/rancher/wrangler/v3 => github.com/krunalhinguu/wrangler/v3 v3.31.0-rancher1
 )
