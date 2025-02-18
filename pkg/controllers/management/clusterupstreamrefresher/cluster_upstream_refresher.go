@@ -2,6 +2,9 @@ package clusterupstreamrefresher
 
 import (
 	"context"
+
+	"github.com/kr/pretty" // Import the pretty package
+
 	"fmt"
 	"reflect"
 	"strconv"
@@ -95,19 +98,19 @@ func getProviderAndReadyStatus(cluster *mgmtv3.Cluster) (string, bool) {
 	switch {
 	case cluster.Spec.AKSConfig != nil:
 		if cluster.Status.AKSStatus.UpstreamSpec == nil {
-			logrus.Debugf("initial upstream spec for cluster [%s] has not been set by cluster handler yet, skipping", cluster.Name)
+			logrus.Infof("initial upstream spec for cluster [%s] has not been set by cluster handler yet, skipping", cluster.Name)
 			return apimgmtv3.ClusterDriverAKS, false
 		}
 		return apimgmtv3.ClusterDriverAKS, true
 	case cluster.Spec.EKSConfig != nil:
 		if cluster.Status.EKSStatus.UpstreamSpec == nil {
-			logrus.Debugf("initial upstream spec for cluster [%s] has not been set by cluster handler yet, skipping", cluster.Name)
+			logrus.Infof("initial upstream spec for cluster [%s] has not been set by cluster handler yet, skipping", cluster.Name)
 			return apimgmtv3.ClusterDriverEKS, false
 		}
 		return apimgmtv3.ClusterDriverEKS, true
 	case cluster.Spec.GKEConfig != nil:
 		if cluster.Status.GKEStatus.UpstreamSpec == nil {
-			logrus.Debugf("initial upstream spec for cluster [%s] has not been set by cluster handler yet, skipping", cluster.Name)
+			logrus.Infof("initial upstream spec for cluster [%s] has not been set by cluster handler yet, skipping", cluster.Name)
 			return apimgmtv3.ClusterDriverGKE, false
 		}
 		return apimgmtv3.ClusterDriverGKE, true
@@ -142,7 +145,9 @@ func nextRefreshTime(refreshInterval time.Duration, lastRefreshTime string) (tim
 		return time.Time{}, fmt.Errorf("unable to parse last KEv2 refresh time [%s]: %v", lastRefreshTime, err)
 	}
 
-	return time.Unix(lastRefreshUnix, 0).Add(refreshInterval), nil
+	nextTime := time.Unix(lastRefreshUnix, 0).Add(refreshInterval)
+	logrus.Infof("Calculated next refresh time for last refresh [%s]: %v", lastRefreshTime, nextTime)
+	return nextTime, nil
 }
 
 func (c *clusterRefreshController) refreshClusterUpstreamSpec(cluster *mgmtv3.Cluster, cloudDriver string) (*mgmtv3.Cluster, error) {
@@ -193,10 +198,12 @@ func (c *clusterRefreshController) refreshClusterUpstreamSpec(cluster *mgmtv3.Cl
 		upstreamSpec = upstreamConfig.gkeConfig
 	}
 
+	logrus.Infof("refreshClusterUpstreamSpec: upstreamSpec: %s", pretty.Sprint(upstreamConfig.aksConfig))
+
 	// compare saved cluster.Status...UpstreamSpec with upstreamSpec,
 	// if there is difference then update cluster.Status...UpstreamSpec
 	if !reflect.DeepEqual(upstreamClusterConfig, upstreamSpec) {
-		logrus.Debugf("updating cluster [%s], upstream change detected", cluster.Name)
+		logrus.Infof("updating cluster [%s], upstream change detected", cluster.Name)
 		cluster = cluster.DeepCopy()
 		// for other cloud drivers, please edit HERE
 		switch cloudDriver {
@@ -211,7 +218,7 @@ func (c *clusterRefreshController) refreshClusterUpstreamSpec(cluster *mgmtv3.Cl
 
 	// check if cluster is still updating changes
 	if !reflect.DeepEqual(initialClusterConfig, appliedClusterConfig) {
-		logrus.Debugf("cluster [%s] currently updating, skipping spec sync", cluster.Name)
+		logrus.Infof("cluster [%s] currently updating, skipping spec sync", cluster.Name)
 		return c.updateCluster(cluster)
 	}
 
@@ -239,7 +246,7 @@ func (c *clusterRefreshController) refreshClusterUpstreamSpec(cluster *mgmtv3.Cl
 	}
 
 	if updateClusterConfig {
-		logrus.Debugf("change detected for cluster [%s], updating spec", cluster.Name)
+		logrus.Infof("change detected for cluster [%s], updating spec", cluster.Name)
 		// for other cloud drivers, please edit HERE
 		switch cloudDriver {
 		case apimgmtv3.ClusterDriverAKS:
@@ -259,7 +266,7 @@ func (c *clusterRefreshController) refreshClusterUpstreamSpec(cluster *mgmtv3.Cl
 			}
 		}
 	} else {
-		logrus.Debugf("cluster [%s] matches upstream, skipping spec sync", cluster.Name)
+		logrus.Infof("cluster [%s] matches upstream, skipping spec sync", cluster.Name)
 	}
 
 	return c.updateCluster(cluster)

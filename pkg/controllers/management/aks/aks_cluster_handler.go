@@ -10,6 +10,8 @@ import (
 	"reflect"
 	"time"
 
+	"github.com/kr/pretty" // Import the pretty package
+
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/rancher/aks-operator/controller"
 	aksv1 "github.com/rancher/aks-operator/pkg/apis/aks.cattle.io/v1"
@@ -83,6 +85,13 @@ func (e *aksOperatorController) onClusterChange(_ string, cluster *apimgmtv3.Clu
 		return cluster, nil
 	}
 
+	// log the initial cluster state
+	logrus.Infof("aks_cluster_handler.go~onClusterChange~Processing cluster: %s", cluster.Name)
+	logrus.Infof("aks_cluster_handler.go~onnClusterChange~82~AKSConfig: %s", pretty.Sprint(cluster.Spec.AKSConfig)) // pretty print the AKSConfig and Cluster Spec
+	logrus.Infof("aks_cluster_handler.go~onClusterChange~83~AppliedSpec: %s", pretty.Sprint(cluster.Status.AppliedSpec))
+	logrus.Infof("aks_cluster_handler.go~onClusterChange~84~AKSStatus: %s", pretty.Sprint(cluster.Status.AKSStatus)) // pretty print the AKSConfig and Cluster Spec
+	// pretty print the AKSConfig and Cluster Spec
+
 	// set driver name
 	if cluster.Status.Driver == "" {
 		cluster = cluster.DeepCopy()
@@ -126,7 +135,9 @@ func (e *aksOperatorController) onClusterChange(_ string, cluster *apimgmtv3.Clu
 
 	// check for changes between aks spec on cluster and the aks spec on the aksClusterConfig object
 	if !reflect.DeepEqual(aksClusterConfigMap, aksClusterConfigDynamic.Object["spec"]) {
-		logrus.Infof("change detected for cluster [%s], updating AKSClusterConfig", cluster.Name)
+		logrus.Infof("Change detected for cluster [%s], updating AKSClusterConfig", cluster.Name)
+		logrus.Infof("aks_cluster_handler.go~onClusterChange~Cluster Spec AKSConfig~: %s", pretty.Sprint(cluster.Spec.AKSConfig))
+		logrus.Infof("aks_cluster_handler.go~onClusterChange~AKS Cluster Config Spec: %s", pretty.Sprint(aksClusterConfigDynamic.Object["spec"]))
 		return e.updateAKSClusterConfig(cluster, aksClusterConfigDynamic, aksClusterConfigMap)
 	}
 
@@ -228,11 +239,17 @@ func (e *aksOperatorController) onClusterChange(_ string, cluster *apimgmtv3.Clu
 		}
 
 		cluster, err = e.recordAppliedSpec(cluster)
+		logrus.Infof("Cluster Spec: %s", pretty.Sprint(cluster.Spec))
+		logrus.Infof("Cluster: %s", pretty.Sprint(cluster))
 		if err != nil {
 			return cluster, err
 		}
 		return e.SetTrue(cluster, apimgmtv3.ClusterConditionUpdated, "")
 	case "updating":
+		// Log when updating phase
+		logrus.Infof("AKS Cluster [%s] is updating", cluster.Name)
+		logrus.Infof("Applied Spec~251: %s", pretty.Sprint(cluster.Status.AppliedSpec))
+		logrus.Infof("AKS Config~252: %s", pretty.Sprint(cluster.Spec.AKSConfig))
 		cluster, err = e.SetTrue(cluster, apimgmtv3.ClusterConditionProvisioned, "")
 		if err != nil {
 			return cluster, err
@@ -313,6 +330,7 @@ func (e *aksOperatorController) updateAKSClusterConfig(cluster *apimgmtv3.Cluste
 				return cluster, fmt.Errorf("unexpected nil cluster config")
 			}
 			status, _ := aksClusterConfigDynamic.Object["status"].(map[string]interface{})
+			logrus.Infof("updateAKSClusterConfig ~ AKSClusterConfig status: %s", pretty.Sprint(status))
 			if status["phase"] == "active" {
 				continue
 			}
@@ -321,7 +339,12 @@ func (e *aksOperatorController) updateAKSClusterConfig(cluster *apimgmtv3.Cluste
 			e.ClusterEnqueueAfter(cluster.Name, enqueueTime)
 			return e.SetUnknown(cluster, apimgmtv3.ClusterConditionUpdated, "")
 		case <-timeout.C:
+			logrus.Infof("updateAKSClusterConfig ~ Timeout waiting for AKS cluster [%s] to transition from active state", cluster.Name)
+
 			cluster, err = e.recordAppliedSpec(cluster)
+			logrus.Infof("updateAKSClusterConfig ~ Cluster Spec: %s", pretty.Sprint(cluster.Spec))
+			logrus.Infof("updateAKSClusterConfig ~ Cluster Status: %s", pretty.Sprint(cluster.Status))
+
 			if err != nil {
 				return cluster, err
 			}
@@ -397,6 +420,9 @@ func buildAKSCCCreateObject(cluster *apimgmtv3.Cluster) (*unstructured.Unstructu
 
 // recordAppliedSpec sets the cluster's current spec as its appliedSpec
 func (e *aksOperatorController) recordAppliedSpec(cluster *apimgmtv3.Cluster) (*apimgmtv3.Cluster, error) {
+	logrus.Infof("recordAppliedSpec ~ Here it is checking if the cluster's current spec is equal to its applied spec")
+	logrus.Infof("recordAppliedSpec ~ Cluster Spec AKSConfig: %s", pretty.Sprint(cluster.Spec.AKSConfig))
+	logrus.Infof("recordAppliedSpec ~ Cluster Status AKSConfig: %s", pretty.Sprint(cluster.Status.AppliedSpec.AKSConfig))
 	if reflect.DeepEqual(cluster.Status.AppliedSpec.AKSConfig, cluster.Spec.AKSConfig) {
 		return cluster, nil
 	}
