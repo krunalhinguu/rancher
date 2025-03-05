@@ -9,6 +9,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/containerservice/armcontainerservice/v5"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/aws/aws-sdk-go/aws"
+	v1 "github.com/rancher/eks-operator/pkg/apis/eks.cattle.io/v1"
 	"github.com/rancher/norman/api/access"
 	"github.com/rancher/norman/httperror"
 	"github.com/rancher/norman/types"
@@ -515,15 +516,17 @@ func validateCredentialAuth(request *types.APIContext, credential string) error 
 // More involved validation is performed in the EKS-operator.
 func validateEKSNodegroups(spec *v32.ClusterSpec) error {
 	nodegroups := spec.EKSConfig.NodeGroups
+
 	if nodegroups == nil {
 		logrus.Info("validateEKSNodegroups: NodeGroups is nil")
-		return nil
+		nodegroups = []v1.NodeGroup{}
 	}
-	if len(nodegroups) == 0 {
-		logrus.Info("inside len(nodegroups) == 0")
-		logrus.Info("validateEKSNodegroups: NodeGroups is empty")
-		return httperror.NewAPIError(httperror.InvalidBodyContent, "must have at least one nodegroup")
-	}
+
+	// if len(nodegroups) == 0 {
+	// 	logrus.Info("inside len(nodegroups) == 0")
+	// 	logrus.Info("validateEKSNodegroups: NodeGroups is empty")
+	// 	return httperror.NewAPIError(httperror.InvalidBodyContent, "must have at least one nodegroup")
+	// }
 
 	var errors []string
 
