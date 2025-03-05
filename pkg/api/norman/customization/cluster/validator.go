@@ -21,6 +21,7 @@ import (
 	"github.com/rancher/rancher/pkg/namespace"
 	mgmtSchema "github.com/rancher/rancher/pkg/schemas/management.cattle.io/v3"
 	"github.com/rancher/rancher/pkg/settings"
+	"github.com/sirupsen/logrus"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -515,33 +516,44 @@ func validateCredentialAuth(request *types.APIContext, credential string) error 
 func validateEKSNodegroups(spec *v32.ClusterSpec) error {
 	nodegroups := spec.EKSConfig.NodeGroups
 	if nodegroups == nil {
+		logrus.Info("validateEKSNodegroups: NodeGroups is nil")
 		return nil
 	}
-	// if len(nodegroups) == 0 {
-	// 	return httperror.NewAPIError(httperror.InvalidBodyContent, fmt.Sprintf("must have at least one nodegroup"))
-	// }
+	if len(nodegroups) == 0 {
+		logrus.Info("inside len(nodegroups) == 0")
+		logrus.Info("validateEKSNodegroups: NodeGroups is empty")
+		return httperror.NewAPIError(httperror.InvalidBodyContent, "must have at least one nodegroup")
+	}
 
 	var errors []string
 
 	for _, ng := range nodegroups {
 		name := aws.StringValue(ng.NodegroupName)
+		logrus.Infof("validateEKSNodegroups: Checking nodegroup %s", name)
 		if name == "" {
-			return httperror.NewAPIError(httperror.InvalidBodyContent, fmt.Sprintf("nodegroupName cannot be an empty"))
+			logrus.Info("validateEKSNodegroups: NodegroupName is empty")
+			return httperror.NewAPIError(httperror.InvalidBodyContent, "nodegroupName cannot be empty")
 		}
 
 		version := ng.Version
 		if version == nil {
+			logrus.Infof("validateEKSNodegroups: Nodegroup %s version is nil", name)
 			continue
 		}
 		if aws.StringValue(version) == "" {
+			logrus.Infof("validateEKSNodegroups: Nodegroup %s version is empty", name)
 			errors = append(errors, fmt.Sprintf("nodegroup [%s] version cannot be empty string", name))
 			continue
 		}
+		logrus.Infof("validateEKSNodegroups: Nodegroup %s version is %s", name, aws.StringValue(version))
 	}
 
 	if len(errors) != 0 {
-		return httperror.NewAPIError(httperror.InvalidBodyContent, fmt.Sprintf(strings.Join(errors, ";")))
+		logrus.Infof("validateEKSNodegroups: Errors found: %s", strings.Join(errors, "; "))
+		return httperror.NewAPIError(httperror.InvalidBodyContent, strings.Join(errors, "; "))
 	}
+
+	logrus.Info("validateEKSNodegroups: Validation successful")
 	return nil
 }
 
