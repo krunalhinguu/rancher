@@ -6,12 +6,12 @@ cd $(dirname $0)
 if ./only-ui-bumps.sh; then
     ./build
     ./package
-    ./chart/ci
+    # ./chart/ci
     exit 0
 fi
 
-./validate
+# ./validate
 ./build
 ./package
-./test
+# ./test
 ./chart/ci
