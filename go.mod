@@ -13,8 +13,8 @@ replace (
 	github.com/matryer/moq => github.com/rancher/moq v0.0.0-20200712062324-13d1f37d2d77
 	github.com/rancher/aks-operator => github.com/krunalhinguu/aks-operator v1.33.0
 	github.com/rancher/apiserver => github.com/krunalhinguu/apiserver v1.33.0
-	github.com/rancher/dynamiclistener => github.com/krunalhinguu/dynamiclistener v1.33.0
-	github.com/rancher/eks-operator => github.com/krunalhinguu/eks-operator v1.33.0
+	github.com/rancher/dynamiclistener => github.com/swastik959/dynamiclistener v0.0.0-20250512090003-51f253fa7fd9
+	github.com/rancher/eks-operator => github.com/swastik959/eks-operator v0.0.0-20250514060442-c4f1b7702746
 	github.com/rancher/gke-operator => github.com/krunalhinguu/gke-operator v1.33.0
 	github.com/rancher/lasso => github.com/krunalhinguu/lasso v0.0.0-20250427011803-995542e7a28f
 	github.com/rancher/machine => github.com/krunalhinguu/machine v1.33.0
@@ -69,7 +69,7 @@ replace (
 	k8s.io/pod-security-admission => k8s.io/pod-security-admission v0.33.0
 	k8s.io/sample-apiserver => k8s.io/sample-apiserver v0.33.0
 	oras.land/oras-go => oras.land/oras-go v1.2.2 // for docker 20.10.x compatibility
-	sigs.k8s.io/cluster-api => sigs.k8s.io/cluster-api v1.9.5
+	sigs.k8s.io/cluster-api => sigs.k8s.io/cluster-api v1.10.1
 )
 
 require (
@@ -95,7 +95,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/aws/aws-sdk-go v1.55.5
 	github.com/aws/aws-sdk-go-v2 v1.36.3
-	github.com/aws/aws-sdk-go-v2/config v1.29.8
+	github.com/aws/aws-sdk-go-v2/config v1.29.14
 	github.com/aws/aws-sdk-go-v2/service/eks v1.60.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.61.2
 	github.com/blang/semver v3.5.1+incompatible
@@ -109,7 +109,7 @@ require (
 	github.com/docker/go-connections v0.5.0
 	github.com/ehazlett/simplelog v0.0.0-20200226020431-d374894e92a4
 	github.com/evanphx/json-patch v5.9.11+incompatible
-	github.com/evanphx/json-patch/v5 v5.9.0
+	github.com/evanphx/json-patch/v5 v5.9.11
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-git/go-git/v5 v5.12.0
 	github.com/go-ldap/ldap/v3 v3.4.1
@@ -169,9 +169,9 @@ require (
 	github.com/vishvananda/netlink v1.3.1-0.20250206174618-62fb240731fa
 	github.com/vmware/govmomi v0.42.0
 	go.uber.org/mock v0.5.0
-	golang.org/x/crypto v0.36.0
-	golang.org/x/mod v0.23.0
-	golang.org/x/net v0.38.0
+	golang.org/x/crypto v0.37.0
+	golang.org/x/mod v0.24.0
+	golang.org/x/net v0.39.0
 	golang.org/x/oauth2 v0.28.0
 	golang.org/x/sync v0.13.0
 	golang.org/x/text v0.24.0
@@ -197,7 +197,7 @@ require (
 	oras.land/oras-go/v2 v2.4.0
 	sigs.k8s.io/aws-iam-authenticator v0.6.17
 	sigs.k8s.io/cluster-api v1.9.5
-	sigs.k8s.io/controller-runtime v0.19.6
+	sigs.k8s.io/controller-runtime v0.20.4
 	sigs.k8s.io/yaml v1.4.0
 )
 
@@ -215,22 +215,22 @@ require (
 	github.com/ProtonMail/go-crypto v1.0.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.0 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.4 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.64 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.67 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.30 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.34 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.34 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.3 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.17 // indirect
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.58.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.210.1 // indirect
-	github.com/aws/aws-sdk-go-v2/service/iam v1.40.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.59.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.213.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/iam v1.41.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.12.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.3.19 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.12.15 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.17.17 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.25.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.29.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.33.17 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.25.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.30.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.33.19 // indirect
 	github.com/aws/smithy-go v1.22.2 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cjlapao/common-go v0.0.39 // indirect
@@ -321,7 +321,7 @@ require (
 	github.com/chai2010/gettext-go v1.0.2 // indirect
 	github.com/containerd/containerd v1.7.24 // indirect
 	github.com/coreos/go-systemd/v22 v22.5.0 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.6 // indirect
 	github.com/cyphar/filepath-securejoin v0.4.1
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dimchansky/utfbom v1.1.1 // indirect
@@ -329,12 +329,12 @@ require (
 	github.com/docker/docker-credential-helpers v0.8.1 // indirect
 	github.com/docker/go-metrics v0.0.1 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
-	github.com/emicklei/go-restful/v3 v3.12.1 // indirect
+	github.com/emicklei/go-restful/v3 v3.12.2 // indirect
 	github.com/exponent-io/jsonpath v0.0.0-20210407135951-1de76d718b3f // indirect
 	github.com/fatih/camelcase v1.0.0 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
-	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-asn1-ber/asn1-ber v1.5.3 // indirect
 	github.com/go-errors/errors v1.4.2 // indirect
 	github.com/go-gorp/gorp/v3 v3.1.0 // indirect
@@ -398,7 +398,7 @@ require (
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f // indirect
-	github.com/onsi/gomega v1.36.3 // indirect
+	github.com/onsi/gomega v1.37.0 // indirect
 	github.com/opencontainers/runc v1.2.1 // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
 	github.com/pkg/sftp v1.13.5 // indirect
@@ -412,9 +412,9 @@ require (
 	github.com/russellhaering/goxmldsig v1.4.0
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
-	github.com/spf13/cast v1.7.0 // indirect
-	github.com/spf13/cobra v1.8.1 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/cast v1.7.1 // indirect
+	github.com/spf13/cobra v1.9.1 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/vishvananda/netns v0.0.4 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
@@ -437,15 +437,15 @@ require (
 	go.opentelemetry.io/proto/otlp v1.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	golang.org/x/term v0.31.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
-	golang.org/x/tools v0.30.0 // indirect
-	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
+	golang.org/x/tools v0.31.0 // indirect
+	gomodules.xyz/jsonpatch/v2 v2.5.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
-	k8s.io/cluster-bootstrap v0.31.3 // indirect
+	k8s.io/cluster-bootstrap v0.32.3 // indirect
 	k8s.io/code-generator v0.33.0 // indirect
 	k8s.io/component-base v0.33.0 // indirect
 	k8s.io/component-helpers v0.33.0 // indirect
