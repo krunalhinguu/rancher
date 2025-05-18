@@ -6,11 +6,13 @@ toolchain go1.24.1
 
 replace (
 	github.com/rancher/aks-operator => github.com/krunalhinguu/aks-operator v1.33.0
-	github.com/rancher/eks-operator => github.com/krunalhinguu/eks-operator v1.33.0
+	github.com/rancher/eks-operator => github.com/swastik959/eks-operator v0.0.0-20250514060442-c4f1b7702746
 	github.com/rancher/gke-operator => github.com/krunalhinguu/gke-operator v1.33.0
+	github.com/rancher/lasso => github.com/krunalhinguu/lasso v0.0.0-20250427011803-995542e7a28f
 	github.com/rancher/norman => github.com/krunalhinguu/norman v1.33.0
 	github.com/rancher/rke => github.com/krunalhinguu/rke v1.33.0
 	github.com/rancher/wrangler/v3 => github.com/krunalhinguu/wrangler/v3 v3.3.0
+
 )
 
 replace (
@@ -53,7 +55,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	k8s.io/api v0.33.0
 	k8s.io/apimachinery v0.33.0
-	sigs.k8s.io/cluster-api v1.9.5
+	sigs.k8s.io/cluster-api v1.10.1
 )
 
 require (
@@ -61,7 +63,7 @@ require (
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/emicklei/go-restful/v3 v3.12.1 // indirect
+	github.com/emicklei/go-restful/v3 v3.12.2 // indirect
 	github.com/fxamacker/cbor/v2 v2.7.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
@@ -84,14 +86,14 @@ require (
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/rancher/lasso v0.2.1 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.opentelemetry.io/otel v1.34.0 // indirect
 	go.opentelemetry.io/otel/trace v1.34.0 // indirect
-	golang.org/x/net v0.38.0 // indirect
+	golang.org/x/net v0.39.0 // indirect
 	golang.org/x/oauth2 v0.28.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	golang.org/x/term v0.31.0 // indirect
 	golang.org/x/text v0.24.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect

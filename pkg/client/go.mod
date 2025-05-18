@@ -4,7 +4,10 @@ go 1.24.0
 
 toolchain go1.24.1
 
-replace github.com/rancher/norman => github.com/krunalhinguu/norman v1.33.0
+replace (
+	github.com/rancher/norman => github.com/krunalhinguu/norman v1.33.0
+	github.com/rancher/wrangler/v3 => github.com/krunalhinguu/wrangler/v3 v3.3.0
+)
 
 require (
 	github.com/rancher/norman v0.6.0
