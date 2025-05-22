@@ -25,6 +25,7 @@ import (
 	extcore "github.com/rancher/steve/pkg/ext"
 	v1 "github.com/rancher/wrangler/v3/pkg/generated/controllers/core/v1"
 	"github.com/rancher/wrangler/v3/pkg/randomtoken"
+	"github.com/sirupsen/logrus"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metainternalversion "k8s.io/apimachinery/pkg/apis/meta/internalversion"
@@ -624,7 +625,9 @@ func (t *SystemStore) list(fullAccess bool, userName, sessionID string, options 
 
 	return &ext.TokenList{
 		ListMeta: metav1.ListMeta{
-			ResourceVersion: secrets.ResourceVersion,
+			ResourceVersion:    secrets.ResourceVersion,
+			Continue:           secrets.Continue,
+			RemainingItemCount: secrets.RemainingItemCount,
 		},
 		Items: tokens,
 	}, nil
@@ -835,7 +838,7 @@ func (t *Store) watch(ctx context.Context, options *metav1.ListOptions) (watch.I
 	go func() {
 		producer, err := t.secretClient.Watch(TokenNamespace, localOptions)
 		if err != nil {
-			close(consumer.ch)
+			logrus.Errorf("tokens: watch: error starting watch: %s", err)
 			return
 		}
 
@@ -855,24 +858,50 @@ func (t *Store) watch(ctx context.Context, options *metav1.ListOptions) (watch.I
 					return
 				}
 
-				// skip bogus events on not-secrets
-				secret, ok := event.Object.(*corev1.Secret)
-				if !ok {
+				var token *ext.Token
+				switch event.Type {
+				case watch.Bookmark:
+					secret, ok := event.Object.(*corev1.Secret)
+					if !ok {
+						logrus.Warnf("tokens: watch: expected secret got %T", event.Object)
+						continue
+					}
+
+					token = &ext.Token{
+						ObjectMeta: metav1.ObjectMeta{
+							ResourceVersion: secret.ResourceVersion,
+						},
+					}
+				case watch.Error:
+					status, ok := event.Object.(*metav1.Status)
+					if ok {
+						logrus.Warnf("tokens: watch: received error event: %s", status.String())
+					} else {
+						logrus.Warnf("tokens: watch: received error event: %s", event.Object.GetObjectKind().GroupVersionKind().String())
+					}
+					continue
+				case watch.Added, watch.Modified, watch.Deleted:
+					secret, ok := event.Object.(*corev1.Secret)
+					if !ok {
+						logrus.Warnf("tokens: watch: expected secret got %T", event.Object)
+						continue
+					}
+
+					token, err = tokenFromSecret(secret)
+					if err != nil {
+						logrus.Errorf("tokens: watch: error converting secret '%s' to token: %s", secret.Name, err)
+						continue
+					}
+
+					// skipping tokens not owned by the watching
+					// user is not required. The watch filter (see
+					// ListOptionMerge above) takes care of only
+					// asking for owned tokens
+					token.Status.Current = token.Name == sessionID
+				default:
+					logrus.Warnf("tokens: watch: received and ignored unknown event: '%s'", event.Type)
 					continue
 				}
-
-				token, err := tokenFromSecret(secret)
-				// skip broken tokens
-				if err != nil {
-					continue
-				}
-
-				// skipping tokens not owned by the watching
-				// user is not required. The watch filter (see
-				// ListOptionMerge above) takes care of only
-				// asking for owned tokens
-
-				token.Status.Current = token.Name == sessionID
 
 				// push to consumer, and terminate ourselves if
 				// the consumer terminated on us

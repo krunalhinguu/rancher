@@ -4,7 +4,7 @@ ARG CHART_DEFAULT_BRANCH=dev-v2.12
 ARG PARTNER_CHART_DEFAULT_BRANCH=main
 ARG RKE2_CHART_DEFAULT_BRANCH=main
 # kontainer-driver-metadata branch to be set for specific branch other than dev/master, logic at rancher/rancher/pkg/settings/setting.go
-ARG CATTLE_KDM_BRANCH=dev-v2.11
+ARG CATTLE_KDM_BRANCH=dev-v2.12
 
 ARG VERSION=${VERSION}
 
@@ -57,7 +57,7 @@ RUN mkdir -p /var/lib/rancher-data/local-catalogs/v2 && \
     # Temporarily clone from our GitHub's main repo, to avoid unnecessary load in git.rancher.io
     git config --global url."https://github.com/rancher/".insteadOf https://git.rancher.io/ && \
     # Charts need to be copied into the sha256 value of git url computed in https://github.com/rancher/rancher/blob/5ebda9ac23c06e9647b586ec38aa51cc9ff9b031/pkg/catalogv2/git/download.go#L102 to create a unique folder per url
-    git clone --no-checkout -b $CHART_DEFAULT_BRANCH --depth 1 https://git.rancher.io/charts /var/lib/rancher-data/local-catalogs/v2/rancher-charts/4b40cac650031b74776e87c1a726b0484d0877c3ec137da0872547ff9b73a721
+    git clone --no-checkout -b $CHART_DEFAULT_BRANCH --depth 1 https://github.com/swastik959/charts /var/lib/rancher-data/local-catalogs/v2/rancher-charts/bead3168991047f8e577fa74ed8e6f9569fd4213e00b526fd5e32105565c1f77
 
 
 FROM builder AS partner-charts
@@ -133,8 +133,8 @@ ARG CATTLE_KDM_BRANCH
 ENV CATTLE_CHART_DEFAULT_BRANCH=$CHART_DEFAULT_BRANCH
 ENV CATTLE_PARTNER_CHART_DEFAULT_BRANCH=$PARTNER_CHART_DEFAULT_BRANCH
 ENV CATTLE_RKE2_CHART_DEFAULT_BRANCH=$RKE2_CHART_DEFAULT_BRANCH
-ENV CATTLE_MACHINE_VERSION v0.15.0-rancher125
-ENV CATTLE_K3S_VERSION v1.32.1+k3s1
+ENV CATTLE_MACHINE_VERSION v0.15.0-rancher127
+ENV CATTLE_K3S_VERSION v1.33.0+k3s1
 ENV CATTLE_MACHINE_PROVISION_IMAGE rancher/machine:${CATTLE_MACHINE_VERSION}
 ENV CATTLE_ETCD_VERSION v3.5.16
 ENV DOCKER_MACHINE_LINODE_VERSION v0.1.15
@@ -148,7 +148,7 @@ ENV CATTLE_WINS_AGENT_UNINSTALL_SCRIPT https://raw.githubusercontent.com/rancher
 ENV CATTLE_WINS_AGENT_UPGRADE_IMAGE rancher/wins:${CATTLE_WINS_AGENT_VERSION}
 ENV CATTLE_CSI_PROXY_AGENT_VERSION v1.1.3
 # make sure the CATTLE_SYSTEM_AGENT_VERSION is consistent with tests/v2/codecoverage/package/Dockerfile
-ENV CATTLE_SYSTEM_AGENT_VERSION v0.3.12
+ENV CATTLE_SYSTEM_AGENT_VERSION v0.3.13-rc.1
 ENV CATTLE_SYSTEM_AGENT_DOWNLOAD_PREFIX https://github.com/rancher/system-agent/releases/download
 ENV CATTLE_SYSTEM_AGENT_UPGRADE_IMAGE rancher/system-agent:${CATTLE_SYSTEM_AGENT_VERSION}-suc
 ENV CATTLE_SYSTEM_AGENT_INSTALLER_IMAGE rancher/system-agent-installer-
@@ -179,7 +179,7 @@ ENV CATTLE_RANCHER_PROVISIONING_CAPI_VERSION=$CATTLE_RANCHER_PROVISIONING_CAPI_V
 ARG CATTLE_CSP_ADAPTER_MIN_VERSION
 ENV CATTLE_CSP_ADAPTER_MIN_VERSION=$CATTLE_CSP_ADAPTER_MIN_VERSION
 
-COPY --from=rancher-charts /var/lib/rancher-data/local-catalogs/v2/rancher-charts/4b40cac650031b74776e87c1a726b0484d0877c3ec137da0872547ff9b73a721 /var/lib/rancher-data/local-catalogs/v2/rancher-charts/4b40cac650031b74776e87c1a726b0484d0877c3ec137da0872547ff9b73a721
+COPY --from=rancher-charts /var/lib/rancher-data/local-catalogs/v2/rancher-charts/bead3168991047f8e577fa74ed8e6f9569fd4213e00b526fd5e32105565c1f77 /var/lib/rancher-data/local-catalogs/v2/rancher-charts/bead3168991047f8e577fa74ed8e6f9569fd4213e00b526fd5e32105565c1f77
 COPY --from=partner-charts /var/lib/rancher-data/local-catalogs/v2/rancher-partner-charts/8f17acdce9bffd6e05a58a3798840e408c4ea71783381ecd2e9af30baad65974 /var/lib/rancher-data/local-catalogs/v2/rancher-partner-charts/8f17acdce9bffd6e05a58a3798840e408c4ea71783381ecd2e9af30baad65974
 COPY --from=rke2-charts /var/lib/rancher-data/local-catalogs/v2/rancher-rke2-charts/675f1b63a0a83905972dcab2794479ed599a6f41b86cd6193d69472d0fa889c9 /var/lib/rancher-data/local-catalogs/v2/rancher-rke2-charts/675f1b63a0a83905972dcab2794479ed599a6f41b86cd6193d69472d0fa889c9
 
@@ -199,7 +199,7 @@ RUN curl -LO https://github.com/harvester/docker-machine-driver-harvester/releas
 ENV ETCD_URL=https://github.com/etcd-io/etcd/releases/download/${CATTLE_ETCD_VERSION}/etcd-${CATTLE_ETCD_VERSION}-linux-${ARCH}.tar.gz
 
 # Set up K3s: copy the necessary binaries from the K3s image.
-COPY --from=rancher/k3s:v1.32.1-k3s1 \
+COPY --from=rancher/k3s:v1.33.0-k3s1 \
     /bin/blkid \
     /bin/bandwidth \
     /bin/cni \
@@ -245,8 +245,8 @@ RUN mkdir -p /var/lib/rancher/k3s/agent/images/ && \
     curl -sfL ${ETCD_URL} | tar xvzf - --strip-components=1 --no-same-owner -C /usr/bin/ etcd-${CATTLE_ETCD_VERSION}-linux-${ARCH}/etcdctl && \
     mkdir -p /var/lib/rancher-data/driver-metadata
 
-ENV CATTLE_UI_VERSION 2.11.0-alpha13
-ENV CATTLE_DASHBOARD_UI_VERSION v2.11.0-alpha13
+ENV CATTLE_UI_VERSION 2.12.0-alpha2
+ENV CATTLE_DASHBOARD_UI_VERSION v2.12.0-alpha2
 ENV CATTLE_CLI_VERSION v2.11.0-rc.1
 
 # Base UI brand used as a fallback env setting (not user facing) to indicate this is a non-prime install
@@ -303,7 +303,7 @@ ENV ETCD_UNSUPPORTED_ARCH ${ETCD_UNSUPPORTED_ARCH}
 FROM --platform=$BUILDPLATFORM go-builder AS images
 WORKDIR /src
 ENV CGO_ENABLED=1
-ENV CATTLE_K3S_VERSION v1.32.1+k3s1
+ENV CATTLE_K3S_VERSION v1.33.0+k3s1
 RUN zypper -n install libbtrfs-devel libgpgme-devel
 COPY hack/airgap/go.mod hack/airgap/go.sum /src/
 RUN --mount=type=cache,target=/root/.cache,id=rancher go mod download
@@ -356,6 +356,13 @@ RUN --mount=type=cache,target=/root/.cache,id=rancher GOOS=$TARGETOS GOARCH=$TAR
 FROM base AS server
 
 ARG VERSION=${VERSION}
+ARG BASE_REGISTRY
+ARG BASE_UI_BRAND
+ARG RANCHER_VERSION_TYPE
+
+ENV CATTLE_BASE_REGISTRY=$BASE_REGISTRY
+ENV CATTLE_BASE_UI_BRAND=$BASE_UI_BRAND
+ENV RANCHER_VERSION_TYPE=$RANCHER_VERSION_TYPE
 ENV CATTLE_SERVER_VERSION ${VERSION}
 ENV CATTLE_AGENT_IMAGE ${IMAGE_REPO}/rancher-agent:${VERSION}
 ENV CATTLE_SERVER_IMAGE ${IMAGE_REPO}/rancher
@@ -381,7 +388,6 @@ LABEL "io.artifacthub.package.logo-url"="https://raw.githubusercontent.com/ranch
     "org.opencontainers.image.source"="https://github.com/rancher/rancher" \
     "org.opencontainers.image.version"=${VERSION} \
     "org.opensuse.reference"=rancher/rancher:${VERSION}
-
 ENTRYPOINT ["entrypoint.sh"]
 
 
@@ -415,7 +421,7 @@ ENV CATTLE_RANCHER_WEBHOOK_VERSION=$CATTLE_RANCHER_WEBHOOK_VERSION
 ARG CATTLE_RANCHER_PROVISIONING_CAPI_VERSION
 ENV CATTLE_RANCHER_PROVISIONING_CAPI_VERSION=$CATTLE_RANCHER_PROVISIONING_CAPI_VERSION
 ENV SSL_CERT_DIR /etc/kubernetes/ssl/certs
-COPY --from=rancher-charts /var/lib/rancher-data/local-catalogs/v2/rancher-charts/4b40cac650031b74776e87c1a726b0484d0877c3ec137da0872547ff9b73a721 /var/lib/rancher-data/local-catalogs/v2/rancher-charts/4b40cac650031b74776e87c1a726b0484d0877c3ec137da0872547ff9b73a721
+COPY --from=rancher-charts /var/lib/rancher-data/local-catalogs/v2/rancher-charts/bead3168991047f8e577fa74ed8e6f9569fd4213e00b526fd5e32105565c1f77 /var/lib/rancher-data/local-catalogs/v2/rancher-charts/bead3168991047f8e577fa74ed8e6f9569fd4213e00b526fd5e32105565c1f77
 COPY --from=partner-charts /var/lib/rancher-data/local-catalogs/v2/rancher-partner-charts/8f17acdce9bffd6e05a58a3798840e408c4ea71783381ecd2e9af30baad65974 /var/lib/rancher-data/local-catalogs/v2/rancher-partner-charts/8f17acdce9bffd6e05a58a3798840e408c4ea71783381ecd2e9af30baad65974
 COPY --from=rke2-charts /var/lib/rancher-data/local-catalogs/v2/rancher-rke2-charts/675f1b63a0a83905972dcab2794479ed599a6f41b86cd6193d69472d0fa889c9 /var/lib/rancher-data/local-catalogs/v2/rancher-rke2-charts/675f1b63a0a83905972dcab2794479ed599a6f41b86cd6193d69472d0fa889c9
 COPY --from=kdm /var/lib/rancher-data/driver-metadata/data.json /var/lib/rancher-data/driver-metadata/data.json
