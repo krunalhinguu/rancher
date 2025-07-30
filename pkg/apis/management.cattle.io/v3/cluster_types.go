@@ -159,6 +159,7 @@ type ClusterSpec struct {
 	AKSConfig                           *aksv1.AKSClusterConfigSpec `json:"aksConfig,omitempty"`
 	EKSConfig                           *eksv1.EKSClusterConfigSpec `json:"eksConfig,omitempty"`
 	GKEConfig                           *gkev1.GKEClusterConfigSpec `json:"gkeConfig,omitempty"`
+	ALIConfig                           *ackv1.ALIClusterConfigSpec `json:"aliConfig,omitempty"`
 	ClusterTemplateName                 string                      `json:"clusterTemplateName,omitempty" norman:"type=reference[clusterTemplate],nocreate,noupdate"`
 	ClusterTemplateRevisionName         string                      `json:"clusterTemplateRevisionName,omitempty" norman:"type=reference[clusterTemplateRevision]"`
 	ClusterTemplateAnswers              Answer                      `json:"answers,omitempty"`
@@ -417,6 +418,11 @@ type EKSStatus struct {
 
 type GKEStatus struct {
 	UpstreamSpec          *gkev1.GKEClusterConfigSpec `json:"upstreamSpec"`
+	PrivateRequiresTunnel *bool                       `json:"privateRequiresTunnel"`
+}
+
+type ALIStatus struct {
+	UpstreamSpec          *ackv1.ACKClusterConfigSpec `json:"upstreamSpec"`
 	PrivateRequiresTunnel *bool                       `json:"privateRequiresTunnel"`
 }
 
