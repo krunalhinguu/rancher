@@ -607,7 +607,9 @@ func migrateImportedClusterFields(w *wrangler.Context) error {
 		// clusterDeploy controller uses GetDesiredAuthImage(mgmtCluster), customizable using Spec.DesiredAuthImage
 		clusterCopy.Spec.DesiredAuthImage = ""
 		// managed by Spec.ImportedConfig.PrivateRegistryURL for imported clusters
-		clusterCopy.Spec.ClusterSecrets.PrivateRegistryURL = ""
+		if clusterCopy.Spec.ImportedConfig != nil && clusterCopy.Spec.ImportedConfig.PrivateRegistryURL == "" {
+			clusterCopy.Spec.ClusterSecrets.PrivateRegistryURL = ""
+		}
 		if _, err := w.Mgmt.Cluster().Update(clusterCopy); err != nil {
 			return err
 		}
