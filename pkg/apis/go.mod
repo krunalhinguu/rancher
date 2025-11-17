@@ -5,6 +5,7 @@ go 1.24.0
 toolchain go1.24.9
 
 replace (
+	github.com/rancher/eks-operator => github.com/krunalhinguu/eks-operator v1.29.3-rancher1.0.20251114123803-3d13c1e9036b
 	k8s.io/api => k8s.io/api v0.34.1
 	k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.34.1
 	k8s.io/apimachinery => k8s.io/apimachinery v0.34.1

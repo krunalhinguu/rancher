@@ -51,6 +51,8 @@ github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
 github.com/kr/text v0.2.0 h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY=
 github.com/kr/text v0.2.0/go.mod h1:eLer722TekiGuMkidMxC/pM04lWEeraHUUmBw8l2grE=
+github.com/krunalhinguu/eks-operator v1.29.3-rancher1.0.20251114123803-3d13c1e9036b h1:iQEYX+kvTGw14BadjmPW3TVk+mqsNZQSf7m9qu4DoNg=
+github.com/krunalhinguu/eks-operator v1.29.3-rancher1.0.20251114123803-3d13c1e9036b/go.mod h1:SbaKX2ttFWCxGOYkrKYeWH/6E4oToq2rRTcrMa2Mmdk=
 github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0SNc=
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
@@ -84,8 +86,6 @@ github.com/rancher/aks-operator v1.13.0-rc.4 h1:tc7p2gZmRg4c6VBwWTQJYwmh1hlN68kf
 github.com/rancher/aks-operator v1.13.0-rc.4/go.mod h1:1ZjZB6zGHK+NGchN9KLplq+xPxRRi+q6Uzet5bjFwxo=
 github.com/rancher/ali-operator v1.13.0-rc.2 h1:a0biHGez+Np9XybJVh3yKN4RGPdaCzfM6D6cAXJac6o=
 github.com/rancher/ali-operator v1.13.0-rc.2/go.mod h1:s5HznpxsN9LsgtX6u5UoW9dZNKnDLuXcwzQRAEoDcog=
-github.com/rancher/eks-operator v1.13.0-rc.4 h1:XowN8+m3QZTIBOBLzar4frtz0xtREb9kcX6KXhF4eas=
-github.com/rancher/eks-operator v1.13.0-rc.4/go.mod h1:SbaKX2ttFWCxGOYkrKYeWH/6E4oToq2rRTcrMa2Mmdk=
 github.com/rancher/fleet/pkg/apis v0.14.0-rc.1 h1:ZsDc25j4/iuKJ8DhxaOSnHdqOskRRe7QxJAdD9HBn28=
 github.com/rancher/fleet/pkg/apis v0.14.0-rc.1/go.mod h1:oc+QHbx4P9guY34dr6UbzCOgt17Q9eSZhlyOs7xSinY=
 github.com/rancher/gke-operator v1.13.0-rc.3 h1:a6U+7+XIbJPH2CE7/vFUx6RpThNbFl7fqIqkEBb6zmA=

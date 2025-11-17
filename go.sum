@@ -451,6 +451,8 @@ github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/kr/text v0.2.0 h1:5Nx0Ya0ZqY2ygV366QzturHI13Jq95ApcVaJBhpS+AY=
 github.com/kr/text v0.2.0/go.mod h1:eLer722TekiGuMkidMxC/pM04lWEeraHUUmBw8l2grE=
+github.com/krunalhinguu/eks-operator v1.29.3-rancher1.0.20251114123803-3d13c1e9036b h1:iQEYX+kvTGw14BadjmPW3TVk+mqsNZQSf7m9qu4DoNg=
+github.com/krunalhinguu/eks-operator v1.29.3-rancher1.0.20251114123803-3d13c1e9036b/go.mod h1:SbaKX2ttFWCxGOYkrKYeWH/6E4oToq2rRTcrMa2Mmdk=
 github.com/kubereboot/kured v1.13.1 h1:mEOtzWRaLNt4ekzHMsuTH1/+6iAuQ3qKg4c7FJc8AXE=
 github.com/kubereboot/kured v1.13.1/go.mod h1:clIzvBID0k5PqWwm0K7NbovdRcaD45oEBMg9Qyah1uQ=
 github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0SNc=
@@ -583,8 +585,6 @@ github.com/rancher/channelserver v0.7.0 h1:ZN5o8aD4mD31uhjEEW2e9yQXa3eOb+4Cp6DcW
 github.com/rancher/channelserver v0.7.0/go.mod h1:Mwd7hlMSu9X4FnZKj+0mA5ak8nTyJZtZsVX33G62Gzc=
 github.com/rancher/dynamiclistener v0.7.3-rc.1 h1:F4Et+TaL8RcXTdTvJKuj6OL5Gg1I1IWJNyBVgKc5E0o=
 github.com/rancher/dynamiclistener v0.7.3-rc.1/go.mod h1:++39p1G3pz0N7yRzvZsjc+5x4l0cMUi2jo49Fy+IbCE=
-github.com/rancher/eks-operator v1.13.0-rc.4 h1:XowN8+m3QZTIBOBLzar4frtz0xtREb9kcX6KXhF4eas=
-github.com/rancher/eks-operator v1.13.0-rc.4/go.mod h1:SbaKX2ttFWCxGOYkrKYeWH/6E4oToq2rRTcrMa2Mmdk=
 github.com/rancher/fleet/pkg/apis v0.14.0-rc.1 h1:ZsDc25j4/iuKJ8DhxaOSnHdqOskRRe7QxJAdD9HBn28=
 github.com/rancher/fleet/pkg/apis v0.14.0-rc.1/go.mod h1:oc+QHbx4P9guY34dr6UbzCOgt17Q9eSZhlyOs7xSinY=
 github.com/rancher/gke-operator v1.13.0-rc.3 h1:a6U+7+XIbJPH2CE7/vFUx6RpThNbFl7fqIqkEBb6zmA=
